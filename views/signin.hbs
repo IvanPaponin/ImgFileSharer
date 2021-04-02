@@ -1,0 +1,21 @@
+<div class="row">
+  <form class="col s12" action="/auth/signin" method="POST">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate" name="email">
+        <label for="email">Email</label>
+        <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+      </div>
+      <h3>{{signupError}}</h3>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" name="password">
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <button class="btn-large waves-effect waves-light" type="submit">Submit
+    {{!-- <i class="material-icons right">send</i> --}}
+  </button>
+  </form>
+</div>

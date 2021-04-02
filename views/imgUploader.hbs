@@ -1,0 +1,30 @@
+<h1>Files Upload</h1>
+{{#if msg}}
+{{msg}}
+{{/if}}
+<form action="/user/upload" method="POST" enctype="multipart/form-data">
+  <div class="file-field input-field">
+    <div class="btn grey">
+      <span>Files</span>
+      <input name="myImage" type="file" multiple="multiple">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
+<br>
+<div class="img-layout">
+  {{#each files}}
+  {{!-- <div class="row"> --}}
+    {{!-- <div class="col s12 m7"> --}}
+      <div class="card">
+        <div class="card-image">
+          <img src="/uploads/{{this.filename}}">
+        </div>
+      </div>
+    {{!-- </div> --}}
+  {{!-- </div> --}}
+  {{/each}}
+</div>
