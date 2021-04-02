@@ -17,6 +17,8 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  gallery: [{type: String}]
+
 });
 
 module.exports = mongoose.model('users', usersSchema);

@@ -1,2 +1,11 @@
 <h1>Welcome {{username}}</h1>
-<a href="/user/upload">file</a>
+<h4><a href="/user/upload">Upload new images</a></h4>
+
+<br>
+<div class="img-layout">
+{{#each userImages}}
+<div class="card-image">
+  <img class="img-uploded" src="/uploads/{{this}}">
+</div>
+{{/each}}
+</div>

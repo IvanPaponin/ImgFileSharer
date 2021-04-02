@@ -12,13 +12,14 @@ const path = require('path');
 
 const upload = multer({
   storage,
-  limits: { fileSize: 1024 * 1024 * 100},
+  limits: { fileSize: 1024 * 1024 * 100 },
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
 }).any('myImage');
 
 function checkFileType(file, cb) {
+  console.log(file);
   const fileTypes = /jpeg|jpg|png|gif/;
   const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = fileTypes.test(file.mimetype);
