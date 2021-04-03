@@ -1,11 +1,37 @@
 <h1>Welcome {{username}}</h1>
-<h4><a href="/user/upload">Upload new images</a></h4>
+
+
+<h1>Files Upload</h1>
+{{#if msg}}
+{{msg}}
+{{/if}}
+<form action="/user/upload" method="POST" enctype="multipart/form-data" name="uploadForm">
+  <div class="file-field input-field">
+    <div class="btn grey">
+      <span>Files</span>
+      <input name="myImage" type="file" multiple="multiple">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
+<br>
+<div class="img-layout">
+  {{#each files}}
+        <div class="card-image">
+          <img class="img-uploded" src="/uploads/{{this.filename}}">
+        </div>
+  {{/each}}
+</div>
 
 <br>
 <div class="img-layout">
 {{#each userImages}}
 <div class="card-image">
-  <img class="img-uploded" src="/uploads/{{this}}">
+  <img class="img-uploded circle" src="/uploads/{{this}}">
 </div>
 {{/each}}
 </div>
+

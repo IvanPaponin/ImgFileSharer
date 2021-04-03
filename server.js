@@ -5,7 +5,7 @@ const MongoStore = require('connect-mongo');
 const path = require('path');
 require('dotenv').config();
 const User = require('./db/user');
-
+const { connect } = require('mongoose');
 
 const PORT = process.env.PORT;
 const DB_CONNECT = process.env.DB_CONNECT;
@@ -26,7 +26,7 @@ app.use(
       maxAge: 60000 * 60,
     },
     store: MongoStore.create({ mongoUrl: DB_CONNECT }),
-  }),
+  })
 );
 
 app.set('view engine', 'hbs');
@@ -55,8 +55,7 @@ app.use('/user', userRouter);
 
 app.listen(PORT, () => {
   console.log('server started!');
-  const mongoose = require('mongoose');
-  mongoose.connect(
+  connect(
     DB_CONNECT,
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log('BASE is OK!!!')

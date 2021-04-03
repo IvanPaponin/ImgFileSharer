@@ -30,7 +30,7 @@ router
   .get(protection, (req, res) => res.render('imgUploader'))
   .post((req, res) => {
     upload(req, res, (err) => {
-      // console.log(req.files);
+      console.log(req.files);
       if (err) {
         return res.render('imgUploader', { msg: err });
       } else {
