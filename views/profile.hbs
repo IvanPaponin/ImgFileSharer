@@ -21,16 +21,21 @@
 <div class="img-layout">
   {{#each files}}
         <div class="card-image">
-          <img class="img-uploded" src="/uploads/{{this.filename}}">
+          <img class="img-uploded card-image responsive-img" src="/uploads/{{this.filename}}">
         </div>
   {{/each}}
 </div>
 
 <br>
+
+<div class="img-layout" id="uploaded-images">
+
+</div>
+
 <div class="img-layout">
 {{#each userImages}}
 <div class="card-image">
-  <img class="img-uploded circle" src="/uploads/{{this}}">
+  <img class="img-uploded card-image responsive-img" src="/uploads/{{this}}">
 </div>
 {{/each}}
 </div>

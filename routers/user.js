@@ -27,24 +27,24 @@ router.get('/profile', protection, async (req, res) => {
 
 router
   .route('/upload')
-  .get(protection, (req, res) => res.render('imgUploader'))
+  // .get(protection, (req, res) => res.render('profile'))
   .post((req, res) => {
     upload(req, res, (err) => {
       console.log(req.files);
       if (err) {
-        return res.render('imgUploader', { msg: err });
+        return res.render('profile', { msg: err });
       } else {
         if (!req.files) {
-          return res.render('imgUploader', {
+          return res.render('profile', {
             msg: 'Error: No File Selected!',
           });
         }
         addToDb(req.files, req.session?.user?._id);
-        res.render('imgUploader', {
-          msg: 'Files Uploaded!',
-          // file: uploads/${req.files[0].filename}
-          files: req.files,
-        });
+        res.json(req.files)
+        // res.render('profile', {
+        //   msg: 'Files Uploaded!',
+        //   files: req.files,
+        // });
       }
     });
   });
