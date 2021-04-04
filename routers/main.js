@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   const images = await Images.find();
   const gallery = [];
   images.forEach( el => {
-    gallery.push(el.filename);
+    gallery.unshift(el.filename);
   });
   res.render('main', {gallery})
 });

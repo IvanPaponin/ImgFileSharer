@@ -18,25 +18,10 @@
   <button type="submit" class="btn">Submit</button>
 </form>
 <br>
-<div class="img-layout">
-  {{#each files}}
-        <div class="card-image">
-          <img class="img-uploded card-image responsive-img" src="/uploads/{{this.filename}}">
-        </div>
-  {{/each}}
-</div>
 
-<br>
-
-<div class="img-layout" id="uploaded-images">
-
-</div>
-
-<div class="img-layout">
+<div class="card-image img-layout" id="user-images">
 {{#each userImages}}
-<div class="card-image">
   <img class="img-uploded card-image responsive-img" src="/uploads/{{this}}">
-</div>
 {{/each}}
 </div>
 

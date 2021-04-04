@@ -11,7 +11,7 @@ async function addToDb(files, userId) {
     const filename = files[i].filename;
     await Images.create({ filename });
     const user = await User.findById(userId);
-    user.gallery?.push(filename);
+    user.gallery?.unshift(filename);
     await user.save();
   }
 }
@@ -30,7 +30,7 @@ router
   // .get(protection, (req, res) => res.render('profile'))
   .post((req, res) => {
     upload(req, res, (err) => {
-      console.log(req.files);
+      // console.log(req.files);
       if (err) {
         return res.render('profile', { msg: err });
       } else {

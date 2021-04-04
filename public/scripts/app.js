@@ -1,9 +1,10 @@
 const uploadForm = document.forms.uploadForm;
-const newImagesDiv = document.querySelector('#uploaded-images');
+const userImagesDiv = document.querySelector('#user-images');
+
+// console.log(userImagesDiv);
 
 uploadForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  // console.log(event);
   const formData = new FormData(event.target);
 
   const response = await fetch(event.target.action, {
@@ -18,7 +19,7 @@ uploadForm.addEventListener('submit', async (event) => {
     const image = document.createElement('img');
     image.classList.add("img-uploded", "card-image", "responsive-img")
     image.src = `/uploads/${result[i].filename}`;
-    newImagesDiv.appendChild(image);
+    userImagesDiv.insertBefore(image, userImagesDiv.firstChild);
   }
-  console.log(newImagesDiv);
+  console.log(userImagesDiv);
 });
