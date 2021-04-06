@@ -1,3 +1,7 @@
+.brand-logo {
+  margin-left: 1rem;
+}
+
 .img-layout {
   display: grid;
 
@@ -12,3 +16,47 @@
   min-height: 200px;
   min-width: 200px;
 }
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  padding: .5rem;
+}
+
+.preview-image {
+  position: relative;
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+}
+
+.preview-image.removing {
+  transform: scale(0);
+  transition: transform .3s;
+}
+
+.preview-image img {
+  width: 180px;
+  height: auto;
+}
+
+.preview-image:hover .preview-remove {
+  opacity: .8;
+}
+
+.preview-remove {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  background: rgba(255, 255, 255, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity .22s;
+}
+
+
