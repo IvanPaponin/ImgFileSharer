@@ -7,7 +7,7 @@ require('dotenv').config();
 const User = require('./db/user');
 const { connect } = require('mongoose');
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT ?? 3000;
 const DB_CONNECT = process.env.DB_CONNECT;
 
 const mainRouter = require('./routers/main');
