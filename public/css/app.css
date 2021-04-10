@@ -10,11 +10,19 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+.img-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+
+}
+
 .img-uploded {
   max-height: 300px;
   max-width: 400px;
   min-height: 200px;
   min-width: 200px;
+  border-radius: 5px;
 }
 
 .preview {

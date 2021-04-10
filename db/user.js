@@ -17,7 +17,7 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  gallery: [{type: String}]
+  gallery: [{type: mongoose.Schema.Types.ObjectId, ref: 'images'}]
 
 });
 

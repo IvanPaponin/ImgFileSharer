@@ -3,6 +3,7 @@ const userImagesDiv = document.querySelector('#user-images');
 const filesInput = document.querySelector('#files-input');
 const preview = document.createElement('div');
 const filePath = document.querySelector('.file-path');
+const imgLayout = document.querySelector('.img-layout');
 let filesToSend = [];
 
 preview.classList.add('preview');
@@ -63,6 +64,10 @@ filesInput.addEventListener('change', (event) => {
 uploadForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const formData = new FormData();
+
+  preview.innerHTML = '';
+  filePath.value = '';
+
   for (let i = 0; i < filesToSend.length; i++) {
     formData.append('myImage',filesToSend[i], filesToSend[i].name); 
   }
@@ -73,12 +78,38 @@ uploadForm.addEventListener('submit', async (event) => {
   });
 
   const result = await response.json();
-  console.log(result);
 
   for (let i = 0; i < result.length; i++) {
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add('img-container');
+
     const image = document.createElement('img');
-    image.classList.add("img-uploded", "card-image", "responsive-img")
+    image.classList.add("img-uploded", "card-image", "responsive-img");
     image.src = `/uploads/${result[i].filename}`;
-    userImagesDiv.insertBefore(image, userImagesDiv.firstChild);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = "waves-effect waves-light btn";
+    deleteBtn.dataset.name = result[i].filename;
+    deleteBtn.innerText = 'удалить';
+
+    imgContainer.appendChild(image);
+    imgContainer.appendChild(deleteBtn);
+    userImagesDiv.insertBefore(imgContainer, userImagesDiv.firstChild);
   }
 });
+
+imgLayout.addEventListener('click', async () => {
+  if (!event.target.dataset.name) return;
+  const img = {filename: event.target.dataset.name};
+  const imgBlock = event.target.closest('.img-container');
+  imgBlock.remove();
+
+  await fetch ('/user', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(img)
+  })
+
+})

@@ -32,7 +32,7 @@ router.route('/signin').get((req, res) => res.render('signin'))
   if (dbUser) {
     req.session.user = dbUser;
     // console.log(dbUser);
-    // res.locals.username = dbUser.username;
+    res.locals.username = dbUser.username;
 
     res.redirect('/');
     return;

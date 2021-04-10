@@ -1,3 +1,5 @@
+<script defer src="/scripts/app.js"></script>
+
 <h1>Welcome {{username}}</h1>
 
 
@@ -5,7 +7,7 @@
 {{#if msg}}
 {{msg}}
 {{/if}}
-<form action="/user/upload" method="POST" enctype="multipart/form-data" name="uploadForm">
+<form action="/user" method="POST" enctype="multipart/form-data" name="uploadForm">
   <div class="file-field input-field">
     <div class="btn grey">
       <span>Files</span>
@@ -20,8 +22,10 @@
 <br>
 
 <div class="card-image img-layout" id="user-images">
-{{#each userImages}}
+  {{#each userImages}}
+  <div class="img-container">
   <img class="img-uploded card-image responsive-img" src="/uploads/{{this}}">
-{{/each}}
+  <button class="waves-effect waves-light btn" data-name="{{this}}">удалить</button>
+  </div>
+  {{/each}}
 </div>
-
