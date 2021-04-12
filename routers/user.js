@@ -11,7 +11,7 @@ async function addToDb(files, userId) {
     const filename = files[i].filename;
     const image = await Images.create({ filename });
     const user = await User.findById(userId);
-    user.gallery?.unshift(image);
+    user?.gallery?.unshift(image);
     await user.save();
   }
 }
@@ -26,7 +26,7 @@ router
     const userImages = user.gallery.map(el => el.filename);
     res.render('profile', { userImages });
   })
-  .post((req, res) => {
+  .post(protection, (req, res) => {
     upload(req, res, (err) => {
       // console.log(req.files);
       if (err) {
@@ -42,7 +42,7 @@ router
       }
     });
   })
-  .delete(async (req, res) => {
+  .delete(protection, async (req, res) => {
     let user = await User.findById(req.session?.user?._id).populate('gallery');
     const img = req.body.filename;
     user.gallery = user.gallery.filter(el => el.filename !== img);
