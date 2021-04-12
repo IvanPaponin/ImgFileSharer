@@ -1,0 +1,27 @@
+.btn-like {
+  font-size: x-large;
+  /* color: red; */
+  border-radius: 360px;
+  border-style: hidden;
+  border-color: white;
+  background-color: white;
+  margin-left: 5px;
+}
+
+.btn-like:hover {
+  color: red;
+  opacity: .6;
+}
+
+.btn-active {
+  color: red;
+}
+
+.btn-like:focus {
+  background-color: white;
+}
+
+.label-like {
+  font-size: x-large;
+  margin-left: 10px;
+}

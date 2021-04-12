@@ -100,9 +100,12 @@ uploadForm.addEventListener('submit', async (event) => {
 
 imgLayout.addEventListener('click', async () => {
   if (!event.target.dataset.name) return;
+  // event.target.preventDefault();
   const img = {filename: event.target.dataset.name};
   const imgBlock = event.target.closest('.img-container');
   imgBlock.remove();
+
+  console.log(img);
 
   await fetch ('/user', {
     method: 'DELETE',

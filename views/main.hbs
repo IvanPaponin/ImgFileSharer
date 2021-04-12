@@ -1,9 +1,19 @@
+<script defer src="/scripts/likes.js"></script>
 <h1>Welcome!</h1>
 
 <div class="img-layout">
-{{#each gallery}}
-<div class="card-image">
-  <img class="img-uploded card-image responsive-img" src="/uploads/{{this}}">
-</div>
-{{/each}}
+  {{#each images}}
+  <div class="card">
+    <div class="card-image">
+      <img class="img-uploded" src="/uploads/{{this.filename}}">
+      <label class="label-like">{{this.likes.length}}</label>
+      {{#if ../userId}}
+      <button class="btn-like" data-name="{{this.filename}}"> ❤</button>
+      {{/if}}
+      <div class="card-action">
+        <a href="#">Comments</a>
+      </div>
+    </div>
+  </div>
+  {{/each}}
 </div>

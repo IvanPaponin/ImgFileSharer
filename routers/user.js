@@ -7,11 +7,12 @@ const { upload } = require('../controllers/uploaders');
 const protection = require('../controllers/protection');
 
 async function addToDb(files, userId) {
+  const user = await User.findById(userId);
+
   for (let i = 0; i < files.length; i++) {
     const filename = files[i].filename;
     const image = await Images.create({ filename });
-    const user = await User.findById(userId);
-    user?.gallery?.unshift(image);
+    user.gallery?.unshift(image);
     await user.save();
   }
 }
@@ -21,9 +22,11 @@ const router = Router();
 router
   .route('/')
   .get(protection, async (req, res) => {
-    const user = await User.findById(req.session?.user?._id).populate('gallery');
+    const user = await User.findById(req.session?.user?._id).populate(
+      'gallery'
+    );
     // console.log(user);
-    const userImages = user.gallery.map(el => el.filename);
+    const userImages = user.gallery.map((el) => el.filename);
     res.render('profile', { userImages });
   })
   .post(protection, (req, res) => {
@@ -45,13 +48,15 @@ router
   .delete(protection, async (req, res) => {
     let user = await User.findById(req.session?.user?._id).populate('gallery');
     const img = req.body.filename;
-    user.gallery = user.gallery.filter(el => el.filename !== img);
+    // console.log(req.body);
+    user.gallery = user.gallery.filter((el) => el.filename !== img);
+    // console.log(user.gallery);
     await user.save();
-    
-    await Images.findOneAndDelete(req.body.filename);
 
+    await Images.deleteOne(req.body);
+    
     fs.unlink(`./public/uploads/${img}`, deleteFileCallback);
     res.end();
-  })
+  });
 
 module.exports = router;
