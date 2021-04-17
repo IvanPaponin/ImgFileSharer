@@ -71,4 +71,13 @@
   transition: opacity .22s;
 }
 
+.particular-image {
+  max-width: 70%;
+  height: auto;
+}
+
+.warning {
+  opacity: .3;
+}
+
 

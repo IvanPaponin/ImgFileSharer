@@ -1,0 +1,39 @@
+<script defer src="/scripts/comments.js"></script>
+
+<div style="display:none" id="userName">{{user.username}}</div>
+<div style="display:none" id="userLastName">{{user.userLastName}}</div>
+<div style="display:none" id="userID">{{user._id}}</div>
+
+
+<div class="card particular-image">
+  <div class="card-image">
+    <img src="/uploads/{{img.filename}}">
+    <label class="label-like">{{img.likes.length}}</label> <span class="like-span"> ❤</span>
+  </div>
+  <div class="card-action">
+    <form action="/card/{{img.filename}}" method="post" name="commentForm">
+      <h5 class="orange-text">Leave a comment:</h5>
+      <div class="input-field col s12">
+        <textarea id="textarea1" class="materialize-textarea" maxlength="400" required name="commentText"></textarea>
+        <label for="textarea1">New comment:</label>
+        <span class="warning">(maximum 400 symbols allowed)</span>
+      </div>
+      <button type="submit" class="btn waves-effect waves-light" id="post">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+    <div class="card-content collection">
+      {{#each img.comments}}
+      <div class="comment collection-item">
+        <p>{{this.commentText}}</p>
+
+        <div class="authorInfo">
+          <span>{{this.author}}</span> <span>{{this.postedAt}}</span>
+        </div>
+        {{#if (if_eq ../user._id this.authorId)}}
+        <a class="waves-effect waves-teal btn-flat" data-assignment="{{this._id}}" href="/card/{{../img.filename}}">Удалить</a>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>

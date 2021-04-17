@@ -98,7 +98,7 @@ uploadForm.addEventListener('submit', async (event) => {
   }
 });
 
-imgLayout.addEventListener('click', async () => {
+imgLayout.addEventListener('click', async (event) => {
   if (!event.target.dataset.name) return;
   // event.target.preventDefault();
   const img = {filename: event.target.dataset.name};

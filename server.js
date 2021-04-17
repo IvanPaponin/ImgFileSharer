@@ -6,6 +6,7 @@ const path = require('path');
 require('dotenv').config();
 const User = require('./db/user');
 const { connect } = require('mongoose');
+const hbs = require('hbs');
 
 const PORT = process.env.PORT ?? 3000;
 const DB_CONNECT = process.env.DB_CONNECT;
@@ -31,6 +32,13 @@ app.use(
 
 app.set('view engine', 'hbs');
 
+hbs.registerHelper('if_eq', (cond1, cond2) => {
+  if(cond1 === cond2 && cond1 !== undefined) {
+    return true;
+  } else {
+    return false;
+  }
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.env.PWD, './public')));
@@ -41,6 +49,7 @@ app.use(async (req, res, next) => {
     const currentUser = await User.findById(userId);
     if (currentUser) {
       res.locals.username = currentUser.username;
+      res.locals.userLastName = currentUser.userLastName;
       res.locals.email = currentUser.email;
       // console.log('middlware===>', res.locals);
     }

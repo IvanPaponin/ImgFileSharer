@@ -1,0 +1,17 @@
+.comment {
+  text-align: justify;
+}
+
+form {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.authorInfo{
+  margin: 10px;
+  margin-top: 3em;
+  display: flex;
+  justify-content: space-between;
+  font-style: italic;
+  opacity: .5;
+}

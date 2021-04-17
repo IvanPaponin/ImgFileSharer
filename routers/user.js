@@ -46,16 +46,24 @@ router
     });
   })
   .delete(protection, async (req, res) => {
-    let user = await User.findById(req.session?.user?._id).populate('gallery');
-    const img = req.body.filename;
-    // console.log(req.body);
-    user.gallery = user.gallery.filter((el) => el.filename !== img);
-    // console.log(user.gallery);
-    await user.save();
+    try {
+      let user = await User.findById(req.session?.user?._id).populate(
+        'gallery'
+      );
+      const img = req.body.filename;
+      // console.log(req.body);
+      user.gallery = user.gallery.filter((el) => el.filename !== img);
+      // console.log(user.gallery);
+      await user.save();
 
-    await Images.deleteOne(req.body);
-    
-    fs.unlink(`./public/uploads/${img}`, deleteFileCallback);
+      await Images.deleteOne(req.body);
+
+      fs.unlink(`./public/uploads/${img}`, deleteFileCallback);
+    } catch (error) {
+      console.dir(error);
+      return res.statusCode(500);
+    }
+
     res.end();
   });
 

@@ -1,8 +1,8 @@
 const layout = document.querySelector('.img-layout');
 
 layout.addEventListener('click', async (event) => {
-  event.preventDefault();
   if (!event.target.dataset.name) return;
+  event.preventDefault();
 
   const likeSymbol = event.target;
 
